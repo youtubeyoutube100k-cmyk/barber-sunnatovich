@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barber Sunnatovich — Премиальный барбершоп в Юнусабаде</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Montserrat & Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            gold: '#C5A059',
+                            goldHover: '#B08B45',
+                            wood: '#2E2219',
+                            darkBg: '#0F0F10',
+                            cardBg: '#18181A',
+                            accent: '#D4AF37',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0F0F10;
+            color: #E2E8F0;
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .wood-gradient {
+            background: linear-gradient(135deg, rgba(197, 160, 89, 0.15) 0%, rgba(15, 15, 16, 0.95) 100%);
+        }
+        .glow-gold {
+            box-shadow: 0 0 25px -5px rgba(197, 160, 89, 0.3);
+        }
+        .glow-mirror {
+            box-shadow: 0 0 35px 2px rgba(212, 175, 55, 0.25);
+        }
+        .glass-panel {
+            background: rgba(24, 24, 26, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-gold selection:text-black">
+
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 w-full z-40 glass-panel border-b border-white/10 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-brand-gold/10 border border-brand-gold/40 flex items-center justify-center text-brand-gold group-hover:bg-brand-gold group-hover:text-black transition-all duration-300">
+                    <i class="fa-solid fa-scissors text-lg"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-heading font-bold text-lg tracking-wider text-white uppercase leading-tight">BARBER</span>
+                    <span class="font-heading text-xs tracking-widest text-brand-gold font-medium">SUNNATOVICH</span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="#services" class="hover:text-brand-gold transition-colors">Услуги и Цены</a>
+                <a href="#features" class="hover:text-brand-gold transition-colors">Преимущества</a>
+                <a href="#gallery" class="hover:text-brand-gold transition-colors">Атмосфера</a>
+                <a href="#contacts" class="hover:text-brand-gold transition-colors">Контакты</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="hidden sm:flex items-center gap-4">
+                <a href="tel:+998934620509" class="text-sm font-semibold text-gray-200 hover:text-brand-gold transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-phone text-brand-gold"></i>
+                    +998 93 462 05 09
+                </a>
+                <button onclick="openBookingModal()" class="bg-brand-gold hover:bg-brand-goldHover text-black px-5 py-2.5 rounded-full font-semibold text-sm transition-all shadow-lg hover:shadow-brand-gold/20 hover:scale-105 active:scale-95">
+                    Записаться
+                </button>
+            </div>
+
+            <!-- Mobile menu button -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-gray-300 hover:text-white p-2">
+                <i class="fa-solid fa-bars text-xl" id="menuIcon"></i>
+            </button>
+        </div>
+
+        <!-- Mobile dropdown menu -->
+        <div id="mobileMenu" class="hidden md:hidden glass-panel border-t border-white/10 px-6 py-6 space-y-4">
+            <a href="#services" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-brand-gold font-medium">Услуги и Цены</a>
+            <a href="#features" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-brand-gold font-medium">Преимущества</a>
+            <a href="#gallery" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-brand-gold font-medium">Атмосфера</a>
+            <a href="#contacts" onclick="toggleMobileMenu()" class="block text-gray-200 hover:text-brand-gold font-medium">Контакты</a>
+            <div class="pt-4 border-t border-white/10 flex flex-col gap-3">
+                <a href="tel:+998934620509" class="text-brand-gold font-semibold flex items-center gap-2">
+                    <i class="fa-solid fa-phone"></i> +998 93 462 05 09
+                </a>
+                <button onclick="toggleMobileMenu(); openBookingModal();" class="w-full bg-brand-gold text-black py-3 rounded-xl font-bold text-center">
+                    Онлайн Запись
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden min-h-screen flex items-center">
+        <!-- Ambient background lighting -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-brand-gold/10 blur-[120px] rounded-full pointer-events-none"></div>
+        <div class="absolute -top-20 -right-20 w-96 h-96 bg-brand-gold/5 blur-[100px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Text -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-brand-gold/30 text-brand-gold text-xs sm:text-sm font-semibold tracking-wide">
+                        <i class="fa-solid fa-crown text-xs"></i> Премиум Барбершоп в Юнусабаде
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight">
+                        Идеальный стиль & <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold via-amber-200 to-brand-gold">
+                            Персональный Уход
+                        </span>
+                    </h1>
+                    
+                    <p class="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                        Атмосфера закрытого VIP-клуба, авторские стрижки, идеальное оформление бороды и максимальный комфорт в 14-м квартале Юнусабада.
+                    </p>
+
+                    <!-- Trust indicators -->
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-6 py-2 text-sm text-gray-300">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-brand-gold"></i>
+                            <span>Индивидуальное кресло</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-brand-gold"></i>
+                            <span>PlayStation & TV</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-brand-gold"></i>
+                            <span>Премиум косметика</span>
+                        </div>
+                    </div>
+
+                    <!-- Call To Action Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                        <button onclick="openBookingModal()" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand-gold hover:bg-brand-goldHover text-black font-bold text-base shadow-lg shadow-brand-gold/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-calendar-check"></i>
+                            Записаться на удобное время
+                        </button>
+                        <a href="tel:+998934620509" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-panel hover:bg-white/10 text-white font-semibold text-base transition-all flex items-center justify-center gap-3 border border-white/10">
+                            <i class="fa-solid fa-phone text-brand-gold"></i>
+                            Позвонить
+                        </a>
+                    </div>
+
+                    <!-- Location Quick Badge -->
+                    <div class="pt-4 flex items-center justify-center lg:justify-start gap-2 text-xs text-gray-400">
+                        <i class="fa-solid fa-location-dot text-brand-gold"></i>
+                        <span>Юнусабад 14-й квартал, 71 (вход Uquv markazi)</span>
+                    </div>
+                </div>
+
+                <!-- Hero Visual Card -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-full max-w-md">
+                        <!-- Decorative Frame -->
+                        <div class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-brand-gold/40 to-amber-900/40 blur-lg opacity-70"></div>
+                        
+                        <div class="relative glass-panel rounded-3xl p-6 border border-brand-gold/30 text-left space-y-5">
+                            <div class="relative h-64 rounded-2xl overflow-hidden glow-mirror border border-brand-gold/40 bg-zinc-900 flex items-center justify-center group">
+                                <!-- Styled Simulated Interior Image Representation matching photograph -->
+                                <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80');"></div>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                                <div class="absolute bottom-4 left-4 right-4 text-white">
+                                    <span class="bg-brand-gold/90 text-black font-bold text-xs px-2.5 py-1 rounded-md uppercase tracking-wide">VIP Атмосфера</span>
+                                    <h3 class="text-lg font-bold mt-1">Индивидуальный Зал</h3>
+                                </div>
+                            </div>
+
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between text-sm py-2 border-b border-white/10">
+                                    <span class="text-gray-400"><i class="fa-solid fa-clock text-brand-gold mr-2"></i> График работы</span>
+                                    <span class="text-white font-semibold">10:00 – 21:00 (Ежедневно)</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm py-2 border-b border-white/10">
+                                    <span class="text-gray-400"><i class="fa-solid fa-star text-brand-gold mr-2"></i> Рейтинг клиентов</span>
+                                    <span class="text-white font-semibold flex items-center gap-1">
+                                        5.0 <i class="fa-solid fa-star text-amber-400 text-xs"></i><i class="fa-solid fa-star text-amber-400 text-xs"></i><i class="fa-solid fa-star text-amber-400 text-xs"></i><i class="fa-solid fa-star text-amber-400 text-xs"></i><i class="fa-solid fa-star text-amber-400 text-xs"></i>
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm py-2">
+                                    <span class="text-gray-400"><i class="fa-solid fa-shield-halved text-brand-gold mr-2"></i> Сервис</span>
+                                    <span class="text-white font-semibold">Напитки & TV включены</span>
+                                </div>
+                            </div>
+
+                            <button onclick="openBookingModal()" class="w-full py-3 bg-white/5 hover:bg-brand-gold hover:text-black text-brand-gold border border-brand-gold/40 rounded-xl font-semibold transition-all text-center">
+                                Выбрать услугу и мастера
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Services & Pricing Section -->
+    <section id="services" class="py-20 relative bg-zinc-950/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold text-brand-gold uppercase tracking-widest mb-2">Прайс-лист</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Услуги и Стоимость</h3>
+                <p class="text-gray-400 mt-3 text-sm sm:text-base">Каждая услуга включает мытье головы до и после, подбор стиля и укладку премиальными средствами.</p>
+            </div>
+
+            <!-- Category Tabs -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Service 1 -->
+                <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-brand-gold/50 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="w-12 h-12 rounded-xl bg-brand-gold/10 border border-brand-gold/30 flex items-center justify-center text-brand-gold group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-scissors text-xl"></i>
+                            </span>
+                            <span class="text-xs font-semibold text-gray-400 bg-white/5 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i> 45 мин</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">Мужская Стрижка</h4>
+                        <p class="text-gray-400 text-sm mb-6">Консультация барбера, мытье головы, мытье подбор формы, стрижка, укладка премиум-средством.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                        <div>
+                            <span class="text-xs text-gray-400 block">Стоимость</span>
+                            <span class="text-xl font-extrabold text-brand-gold">100 000 UZS</span>
+                        </div>
+                        <button onclick="selectServiceAndBook('Мужская Стрижка', '100 000 UZS')" class="px-4 py-2 bg-brand-gold/20 text-brand-gold hover:bg-brand-gold hover:text-black font-semibold rounded-lg text-sm transition-all">
+                            Записаться
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="glass-panel p-6 rounded-2xl border border-brand-gold/40 relative overflow-hidden flex flex-col justify-between group">
+                    <div class="absolute top-0 right-0 bg-brand-gold text-black text-[10px] font-extrabold px-3 py-1 rounded-bl-lg uppercase tracking-wider">
+                        Популярное
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="w-12 h-12 rounded-xl bg-brand-gold text-black flex items-center justify-center font-bold text-xl group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-user-tie"></i>
+                            </span>
+                            <span class="text-xs font-semibold text-gray-400 bg-white/5 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i> 70 мин</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">Комплекс "Стрижка + Борода"</h4>
+                        <p class="text-gray-400 text-sm mb-6">Полный уход: авторская стрижка, моделирование и распаривание бороды с тонизирующим уходом.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                        <div>
+                            <span class="text-xs text-gray-400 block">Стоимость</span>
+                            <span class="text-xl font-extrabold text-brand-gold">150 000 UZS</span>
+                        </div>
+                        <button onclick="selectServiceAndBook('Комплекс Стрижка + Борода', '150 000 UZS')" class="px-4 py-2 bg-brand-gold text-black hover:bg-brand-goldHover font-bold rounded-lg text-sm transition-all shadow-md">
+                            Записаться
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-brand-gold/50 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="w-12 h-12 rounded-xl bg-brand-gold/10 border border-brand-gold/30 flex items-center justify-center text-brand-gold group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-ruler-horizontal text-xl"></i>
+                            </span>
+                            <span class="text-xs font-semibold text-gray-400 bg-white/5 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i> 30 мин</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">Оформление Бороды</h4>
+                        <p class="text-gray-400 text-sm mb-6">Создание четких контуров, коррекция длинны, использование опасной бритвы и ухаживающего масла.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                        <div>
+                            <span class="text-xs text-gray-400 block">Стоимость</span>
+                            <span class="text-xl font-extrabold text-brand-gold">70 000 UZS</span>
+                        </div>
+                        <button onclick="selectServiceAndBook('Оформление Бороды', '70 000 UZS')" class="px-4 py-2 bg-brand-gold/20 text-brand-gold hover:bg-brand-gold hover:text-black font-semibold rounded-lg text-sm transition-all">
+                            Записаться
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-brand-gold/50 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="w-12 h-12 rounded-xl bg-brand-gold/10 border border-brand-gold/30 flex items-center justify-center text-brand-gold group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-child text-xl"></i>
+                            </span>
+                            <span class="text-xs font-semibold text-gray-400 bg-white/5 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i> 40 мин</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">Детская Стрижка</h4>
+                        <p class="text-gray-400 text-sm mb-6">Стрижка для юных джентльменов (до 12 лет). Бережный подход, просмотр мультфильмов на TV.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                        <div>
+                            <span class="text-xs text-gray-400 block">Стоимость</span>
+                            <span class="text-xl font-extrabold text-brand-gold">80 000 UZS</span>
+                        </div>
+                        <button onclick="selectServiceAndBook('Детская Стрижка', '80 000 UZS')" class="px-4 py-2 bg-brand-gold/20 text-brand-gold hover:bg-brand-gold hover:text-black font-semibold rounded-lg text-sm transition-all">
+                            Записаться
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-brand-gold/50 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="w-12 h-12 rounded-xl bg-brand-gold/10 border border-brand-gold/30 flex items-center justify-center text-brand-gold group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-spray-can text-xl"></i>
+                            </span>
+                            <span class="text-xs font-semibold text-gray-400 bg-white/5 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i> 25 мин</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">Укладка и VIP Уход</h4>
+                        <p class="text-gray-400 text-sm mb-6">Мытье головы, стайлинг, стайлинг волосяного покрова, маска и легкий массаж головы.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                        <div>
+                            <span class="text-xs text-gray-400 block">Стоимость</span>
+                            <span class="text-xl font-extrabold text-brand-gold">50 000 UZS</span>
+                        </div>
+                        <button onclick="selectServiceAndBook('Укладка и VIP Уход', '50 000 UZS')" class="px-4 py-2 bg-brand-gold/20 text-brand-gold hover:bg-brand-gold hover:text-black font-semibold rounded-lg text-sm transition-all">
+                            Записаться
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-brand-gold/50 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="w-12 h-12 rounded-xl bg-brand-gold/10 border border-brand-gold/30 flex items-center justify-center text-brand-gold group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-wand-magic-sparkles text-xl"></i>
+                            </span>
+                            <span class="text-xs font-semibold text-gray-400 bg-white/5 px-2.5 py-1 rounded-full"><i class="fa-regular fa-clock mr-1"></i> 30 мин</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">Камуфляж Седины</h4>
+                        <p class="text-gray-400 text-sm mb-6">Мягкое тонирование седины для волос или бороды без эффекта неестественного окрашивания.</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                        <div>
+                            <span class="text-xs text-gray-400 block">Стоимость</span>
+                            <span class="text-xl font-extrabold text-brand-gold">90 000 UZS</span>
+                        </div>
+                        <button onclick="selectServiceAndBook('Камуфляж Седины', '90 000 UZS')" class="px-4 py-2 bg-brand-gold/20 text-brand-gold hover:bg-brand-gold hover:text-black font-semibold rounded-lg text-sm transition-all">
+                            Записаться
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us / Features -->
+    <section id="features" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold text-brand-gold uppercase tracking-widest mb-2">Комфорт и Стандарты</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Почему выбирают Barber Sunnatovich</h3>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="glass-panel p-8 rounded-2xl text-center border border-white/10 hover:border-brand-gold/40 transition-all">
+                    <div class="w-16 h-16 rounded-2xl bg-brand-gold/10 text-brand-gold border border-brand-gold/30 flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fa-solid fa-chair"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Персональное Пространство</h4>
+                    <p class="text-gray-400 text-sm">Уютный кабинет с удобным кожаным креслом и зеркалом с мягкой теплой подсветкой.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="glass-panel p-8 rounded-2xl text-center border border-white/10 hover:border-brand-gold/40 transition-all">
+                    <div class="w-16 h-16 rounded-2xl bg-brand-gold/10 text-brand-gold border border-brand-gold/30 flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fa-solid fa-tv"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Зона Отдыха & TV</h4>
+                    <p class="text-gray-400 text-sm">Смотрите любимые шоу, фильмы или YouTube на больших экранах во время ожидания или процедуры.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="glass-panel p-8 rounded-2xl text-center border border-white/10 hover:border-brand-gold/40 transition-all">
+                    <div class="w-16 h-16 rounded-2xl bg-brand-gold/10 text-brand-gold border border-brand-gold/30 flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fa-solid fa-pump-soap"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">100% Стерильность</h4>
+                    <p class="text-gray-400 text-sm">Дезинфекция инструментов перед каждым клиентом и индивидуальные одноразовые материалы.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="glass-panel p-8 rounded-2xl text-center border border-white/10 hover:border-brand-gold/40 transition-all">
+                    <div class="w-16 h-16 rounded-2xl bg-brand-gold/10 text-brand-gold border border-brand-gold/30 flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fa-solid fa-mug-hot"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Напитки для Гостей</h4>
+                    <p class="text-gray-400 text-sm">Качественный кофе, ароматный чай или прохладительные напитки абсолютно бесплатно.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interior & Atmosphere Gallery Section -->
+    <section id="gallery" class="py-20 bg-zinc-950/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold text-brand-gold uppercase tracking-widest mb-2">Интерьер</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Атмосфера барбершопа</h3>
+                <p class="text-gray-400 mt-2 text-sm">Стильные деревянные панели, современный грильято-потолок и профессиональное оснащение</p>
+            </div>
+
+            <!-- Gallery Cards Simulated from provided user pictures -->
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Gallery 1 -->
+                <div class="group relative h-80 rounded-2xl overflow-hidden glass-panel border border-white/10">
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style="background-image: url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 right-6">
+                        <h4 class="text-lg font-bold text-white">Рабочее кресло и подсветка</h4>
+                        <p class="text-xs text-brand-gold mt-1">Комфорт во время стрижки</p>
+                    </div>
+                </div>
+
+                <!-- Gallery 2 -->
+                <div class="group relative h-80 rounded-2xl overflow-hidden glass-panel border border-white/10">
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style="background-image: url('https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 right-6">
+                        <h4 class="text-lg font-bold text-white">Зона Ожидания</h4>
+                        <p class="text-xs text-brand-gold mt-1">Удобный кожаный диван и Smart TV</p>
+                    </div>
+                </div>
+
+                <!-- Gallery 3 -->
+                <div class="group relative h-80 rounded-2xl overflow-hidden glass-panel border border-white/10">
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style="background-image: url('https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=800&q=80');"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 right-6">
+                        <h4 class="text-lg font-bold text-white">Моечная зона и уход</h4>
+                        <p class="text-xs text-brand-gold mt-1">Профессиональное оборудование</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Contact Info Section -->
+    <section id="contacts" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-10 items-center">
+                
+                <!-- Contact info card -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div>
+                        <h2 class="text-xs font-bold text-brand-gold uppercase tracking-widest mb-2">Локация и Контакты</h2>
+                        <h3 class="text-3xl font-extrabold text-white">Ждем вас в гости</h3>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Address -->
+                        <div class="glass-panel p-4 rounded-xl flex items-start gap-4 border border-white/10">
+                            <div class="w-10 h-10 rounded-lg bg-brand-gold/10 text-brand-gold flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-white">Адрес</h4>
+                                <p class="text-sm text-gray-300 mt-0.5">Юнусабадский район, массив Юнусабад, 14-й квартал, 71</p>
+                                <p class="text-xs text-gray-400 mt-1 font-mono">(Uquv markazi va bolalar kiyim dukoni kirish qismi)</p>
+                            </div>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="glass-panel p-4 rounded-xl flex items-start gap-4 border border-white/10">
+                            <div class="w-10 h-10 rounded-lg bg-brand-gold/10 text-brand-gold flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-white">Телефон для записи</h4>
+                                <a href="tel:+998934620509" class="text-base font-bold text-brand-gold hover:underline block mt-0.5">+998 93 462 05 09</a>
+                                <span class="text-xs text-gray-400">доп: 998974232202</span>
+                            </div>
+                        </div>
+
+                        <!-- Hours -->
+                        <div class="glass-panel p-4 rounded-xl flex items-start gap-4 border border-white/10">
+                            <div class="w-10 h-10 rounded-lg bg-brand-gold/10 text-brand-gold flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-white">Время работы</h4>
+                                <p class="text-sm text-gray-300 mt-0.5">Каждый день: 10:00 – 21:00</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Buttons -->
+                    <div class="pt-2 flex items-center gap-4">
+                        <a href="https://t.me" target="_blank" class="flex-1 py-3 px-4 glass-panel hover:bg-white/10 border border-white/10 rounded-xl text-center text-sm font-semibold text-white flex items-center justify-center gap-2 transition-all">
+                            <i class="fa-brands fa-telegram text-sky-400 text-lg"></i> Telegram
+                        </a>
+                        <a href="https://instagram.com" target="_blank" class="flex-1 py-3 px-4 glass-panel hover:bg-white/10 border border-white/10 rounded-xl text-center text-sm font-semibold text-white flex items-center justify-center gap-2 transition-all">
+                            <i class="fa-brands fa-instagram text-pink-500 text-lg"></i> Instagram
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Interactive Map / Location Preview -->
+                <div class="lg:col-span-7">
+                    <div class="glass-panel p-4 rounded-3xl border border-brand-gold/30 h-96 relative overflow-hidden flex flex-col justify-between">
+                        <!-- Yandex / Google Maps iframe placeholder view -->
+                        <div class="absolute inset-0 bg-zinc-900 flex items-center justify-center text-center p-6">
+                            <div class="space-y-4">
+                                <div class="w-16 h-16 rounded-full bg-brand-gold/20 text-brand-gold flex items-center justify-center mx-auto text-2xl border border-brand-gold/40 animate-bounce">
+                                    <i class="fa-solid fa-map-pin"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-white">Карта Юнусабад 14-й квартал, 71</h4>
+                                <p class="text-sm text-gray-400 max-w-md mx-auto">Нажмите кнопку ниже, чтобы открыть точно проложенный маршрут в Яндекс Картах или 2GIS</p>
+                                <div class="flex flex-wrap justify-center gap-3 pt-2">
+                                    <a href="https://yandex.ru/maps" target="_blank" class="px-5 py-2.5 bg-yellow-500 hover:bg-yellow-600 text-black font-bold text-xs rounded-xl transition-all flex items-center gap-2">
+                                        <i class="fa-solid fa-route"></i> Яндекс Карты
+                                    </a>
+                                    <a href="https://2gis.uz" target="_blank" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-all flex items-center gap-2">
+                                        <i class="fa-solid fa-compass"></i> открыть 2GIS
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 py-10 bg-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-brand-gold/20 text-brand-gold flex items-center justify-center">
+                    <i class="fa-solid fa-scissors text-sm"></i>
+                </div>
+                <span class="font-heading font-bold text-sm tracking-wider text-white">BARBER SUNNATOVICH</span>
+            </div>
+            <p class="text-xs text-gray-500">© 2026 Barber Sunnatovich. Все права защищены. Юнусабад, Ташкент.</p>
+        </div>
+    </footer>
+
+
+    <!-- Booking Modal Dialog -->
+    <div id="bookingModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="glass-panel w-full max-w-lg rounded-3xl p-6 sm:p-8 border border-brand-gold/40 relative shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
+            
+            <!-- Close Button -->
+            <button onclick="closeBookingModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white w-8 h-8 flex items-center justify-center rounded-full bg-white/5">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Modal Header -->
+            <div class="text-center">
+                <h3 class="text-2xl font-bold text-white">Онлайн-запись</h3>
+                <p class="text-xs text-brand-gold mt-1">Выберите удобную услугу и время</p>
+            </div>
+
+            <!-- Modal Form -->
+            <form id="bookingForm" onsubmit="handleBookingSubmit(event)" class="space-y-4">
+                
+                <!-- Service selection -->
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1.5">Услуга</label>
+                    <select id="modalServiceSelect" required class="w-full bg-zinc-900 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold">
+                        <option value="Мужская Стрижка (100 000 UZS)">Мужская Стрижка — 100 000 UZS</option>
+                        <option value="Комплекс Стрижка + Борода (150 000 UZS)">Комплекс "Стрижка + Борода" — 150 000 UZS</option>
+                        <option value="Оформление Бороды (70 000 UZS)">Оформление Бороды — 70 000 UZS</option>
+                        <option value="Детская Стрижка (80 000 UZS)">Детская Стрижка — 80 000 UZS</option>
+                        <option value="Укладка и VIP Уход (50 000 UZS)">Укладка и VIP Уход — 50 000 UZS</option>
+                        <option value="Камуфляж Седины (90 000 UZS)">Камуфляж Седины — 90 000 UZS</option>
+                    </select>
+                </div>
+
+                <!-- Date & Time Row -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 mb-1.5">Дата</label>
+                        <input type="date" id="bookingDate" required class="w-full bg-zinc-900 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 mb-1.5">Время</label>
+                        <select id="bookingTime" required class="w-full bg-zinc-900 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold">
+                            <option value="10:00">10:00</option>
+                            <option value="11:30">11:30</option>
+                            <option value="13:00">13:00</option>
+                            <option value="14:30">14:30</option>
+                            <option value="16:00">16:00</option>
+                            <option value="17:30">17:30</option>
+                            <option value="19:00">19:00</option>
+                            <option value="20:00">20:00</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Name Input -->
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1.5">Ваше Имя</label>
+                    <input type="text" id="clientName" placeholder="Введите ваше имя" required class="w-full bg-zinc-900 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold">
+                </div>
+
+                <!-- Phone Input -->
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1.5">Номер Телефона</label>
+                    <input type="tel" id="clientPhone" placeholder="+998 90 123 45 67" required class="w-full bg-zinc-900 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold">
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full py-4 bg-brand-gold hover:bg-brand-goldHover text-black font-extrabold rounded-xl transition-all shadow-lg shadow-brand-gold/20 text-base mt-2">
+                    Подтвердить запись
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Message Dialog Modal -->
+    <div id="successModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+        <div class="glass-panel w-full max-w-md rounded-3xl p-8 border border-emerald-500/40 text-center space-y-4">
+            <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-3xl">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-white">Запись успешно создана!</h3>
+            <p id="successMessageText" class="text-sm text-gray-300 leading-relaxed">
+                Спасибо! Мы свяжемся с вами в ближайшее время для подтверждения.
+            </p>
+            <button onclick="closeSuccessModal()" class="w-full py-3 bg-emerald-500 hover:bg-emerald-600 text-black font-bold rounded-xl transition-all text-sm mt-4">
+                Отлично
+            </button>
+        </div>
+    </div>
+
+
+    <!-- JavaScript Interactive Logic -->
+    <script>
+        // Set default date to today in date picker
+        document.addEventListener('DOMContentLoaded', () => {
+            const dateInput = document.getElementById('bookingDate');
+            if (dateInput) {
+                const today = new Date().toISOString().split('T')[0];
+                dateInput.min = today;
+                dateInput.value = today;
+            }
+        });
+
+        // Toggle mobile navbar menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Open Booking Modal
+        function openBookingModal() {
+            document.getElementById('bookingModal').classList.remove('hidden');
+        }
+
+        // Close Booking Modal
+        function closeBookingModal() {
+            document.getElementById('bookingModal').classList.add('hidden');
+        }
+
+        // Select Service from pricing cards and open modal preselected
+        function selectServiceAndBook(serviceName, price) {
+            const selectElement = document.getElementById('modalServiceSelect');
+            const targetValue = `${serviceName} (${price})`;
+            
+            for (let option of selectElement.options) {
+                if (option.value.includes(serviceName)) {
+                    option.selected = true;
+                    break;
+                }
+            }
+            openBookingModal();
+        }
+
+        // Form Submission logic
+        function handleBookingSubmit(event) {
+            event.preventDefault();
+
+            const service = document.getElementById('modalServiceSelect').value;
+            const date = document.getElementById('bookingDate').value;
+            const time = document.getElementById('bookingTime').value;
+            const name = document.getElementById('clientName').value;
+            const phone = document.getElementById('clientPhone').value;
+
+            // Close booking modal
+            closeBookingModal();
+
+            // Prepare Success Info
+            const successText = `Уважаемый <b>${name}</b>, вы записаны на услугу <b>${service}</b> на <b>${date} в ${time}</b>.<br><br>Мы ждем вас по адресу: Юнусабад 14-й квартал, 71.`;
+            document.getElementById('successMessageText').innerHTML = successText;
+
+            // Open Success Modal
+            document.getElementById('successModal').classList.remove('hidden');
+
+            // Reset Form
+            document.getElementById('bookingForm').reset();
+        }
+
+        // Close Success Modal
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
